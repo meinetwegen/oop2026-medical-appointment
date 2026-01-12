@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class DatabaseConnection {
-    private static final String URL = "jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres";
+    private static final String URL = "jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?connectTimeout=10";
     private static final String USER = "postgres.xtygekbhslptnfhedzjn";
     private static final String PASSWORD = "GpHzuCPmT8oRiEjn";
     private DatabaseConnection() {
