@@ -1,13 +1,23 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
-
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+import edu.aitu.oop3.db.DatabaseConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Connecting to Supabase...");
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            System.out.println("Connected successfully!");
+            String sql = "SELECT CURRENT_TIMESTAMP";
+            try (PreparedStatement stmt = connection.prepareStatement(sql);
+                 ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Database time: " + rs.getTimestamp(1));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while connecting to database:");
+            e.printStackTrace();
+        }
     }
 }
