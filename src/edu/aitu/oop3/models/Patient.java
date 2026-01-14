@@ -4,13 +4,13 @@ public class Patient extends User {
     private String email;
     private String phoneNumber;
 
-    public Patient(String fullName, String email, String phoneNumber){      //для пациентов не из бд
+    public Patient(String fullName, String email, String phoneNumber){
         super(fullName);
         setEmail(email);
         setPhoneNumber(phoneNumber);
     }
 
-    public Patient(int id, String fullName, String email, String phoneNumber) {     //для загрузки из бд
+    public Patient(int id, String fullName, String email, String phoneNumber) {
         super(id, fullName);
         setEmail(email);
         setPhoneNumber(phoneNumber);

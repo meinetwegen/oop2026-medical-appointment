@@ -58,4 +58,19 @@ public class PostgresDoctorRepository implements IDoctorRepository {
         }
         return doctors;
     }
+
+    @Override
+    public List<Doctor> findBySpecialization(String spec) throws SQLException {
+        List<Doctor> doctors = new ArrayList<>();
+        String sql = "SELECT * FROM doctors WHERE specialization ILIKE ?"; // ILIKE для поиска без учета регистра
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + spec + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                doctors.add(new Doctor(rs.getInt("id"), rs.getString("full_name"), rs.getString("specialization")));
+            }
+        }
+        return doctors;
+    }
 }

@@ -1,4 +1,4 @@
-//проверка существования + поиск пациента
+
 package edu.aitu.oop3.repositories;
 
 import edu.aitu.oop3.models.Patient;

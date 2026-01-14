@@ -22,10 +22,11 @@ public class Main {
                 }
             }
 
-            IAppointmentRepository appRepo = new PostgresAppointmentRepository();
             IDoctorRepository doctorRepo = new PostgresDoctorRepository();
+            IAppointmentRepository appRepo = new PostgresAppointmentRepository();
             IPatientRepository patientRepo = new PostgresPatientRepository();
 
+            DoctorService doctorService = new DoctorService(doctorRepo);
             DoctorAvailabilityService availabilityService = new DoctorAvailabilityService(appRepo);
             AppointmentService appointmentService = new AppointmentService(appRepo, doctorRepo, patientRepo, availabilityService);
 
@@ -42,6 +43,7 @@ public class Main {
                 System.out.println("6. View Patient's Upcoming Visits");
                 System.out.println("7. Show All Patients");
                 System.out.println("8. Show All Doctors");
+                System.out.println("9. Search Doctor by Specialization");
                 System.out.println("0. Exit");
                 System.out.print("Select an option: ");
 
@@ -126,6 +128,16 @@ public class Main {
                             } else {
                                 System.out.println("--- Registered Doctors ---");
                                 allDoctors.forEach(System.out::println);
+                            }
+                            break;
+
+                        case 9:
+                            System.out.print("Enter specialization (e.g. Dentist): ");
+                            String spec = scanner.nextLine().trim();
+                            if (spec.isEmpty()) {
+                                System.out.println("Error: Specialization cannot be empty.");
+                            } else {
+                                doctorService.findDoctorsBySpecialization(spec);
                             }
                             break;
                     }

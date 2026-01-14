@@ -1,5 +1,4 @@
-//Интерфейсы определяют, что приложение может делать с базой данных, не уточняя, как именно (через PostgreSQL, MySQL или файл).
-//создание записей, их отмена и получение списков для расписания
+
 package edu.aitu.oop3.repositories;
 
 import edu.aitu.oop3.models.Appointment;
