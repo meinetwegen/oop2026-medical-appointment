@@ -9,4 +9,5 @@ public interface IDoctorRepository {
     void add(Doctor doctor) throws SQLException;
     Doctor findById(int id) throws SQLException;
     List<Doctor> findAll() throws SQLException;
+    List<Doctor> findBySpecialization(String spec) throws SQLException;
 }

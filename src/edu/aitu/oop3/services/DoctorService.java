@@ -1,7 +1,7 @@
  package edu.aitu.oop3.services;
 
 import edu.aitu.oop3.models.Doctor;
-import edu.aitu.oop3.repositories.IDoctorRepository;
+import edu.aitu.oop3.repositories.interfaces.IDoctorRepository;
 import java.sql.SQLException;
 import java.util.List;
 

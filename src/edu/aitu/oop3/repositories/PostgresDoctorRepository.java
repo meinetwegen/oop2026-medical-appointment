@@ -70,7 +70,7 @@ public class PostgresDoctorRepository implements IDoctorRepository {
     public List<Doctor> findBySpecialization(String spec) throws SQLException {
         List<Doctor> doctors = new ArrayList<>();
         String sql = "SELECT * FROM doctors WHERE specialization ILIKE ?"; // ILIKE для поиска без учета регистра
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = db.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, "%" + spec + "%");
             ResultSet rs = stmt.executeQuery();
