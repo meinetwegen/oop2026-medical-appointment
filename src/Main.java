@@ -1,8 +1,11 @@
-import edu.aitu.oop3.db.DatabaseConnection;
+import edu.aitu.oop3.db.IDB;
+import edu.aitu.oop3.db.PostgresDB;
 import edu.aitu.oop3.models.*;
 import edu.aitu.oop3.repositories.*;
+import edu.aitu.oop3.repositories.interfaces.IAppointmentRepository;
+import edu.aitu.oop3.repositories.interfaces.IDoctorRepository;
+import edu.aitu.oop3.repositories.interfaces.IPatientRepository;
 import edu.aitu.oop3.services.*;
-import edu.aitu.oop3.exceptions.*;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -11,8 +14,9 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        IDB db = new PostgresDB();
         System.out.println("Connecting to Supabase...");
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = db.getConnection()) {
             System.out.println("Connected successfully!");
             String sqlCheck = "SELECT CURRENT_TIMESTAMP";
             try (PreparedStatement stmt = connection.prepareStatement(sqlCheck);
@@ -22,9 +26,9 @@ public class Main {
                 }
             }
 
-            IAppointmentRepository appRepo = new PostgresAppointmentRepository();
-            IDoctorRepository doctorRepo = new PostgresDoctorRepository();
-            IPatientRepository patientRepo = new PostgresPatientRepository();
+            IAppointmentRepository appRepo = new PostgresAppointmentRepository(db);
+            IDoctorRepository doctorRepo = new PostgresDoctorRepository(db);
+            IPatientRepository patientRepo = new PostgresPatientRepository(db);
 
             DoctorAvailabilityService availabilityService = new DoctorAvailabilityService(appRepo);
             AppointmentService appointmentService = new AppointmentService(appRepo, doctorRepo, patientRepo, availabilityService);

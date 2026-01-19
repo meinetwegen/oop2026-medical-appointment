@@ -1,5 +1,5 @@
 //для поиска врачей
-package edu.aitu.oop3.repositories;
+package edu.aitu.oop3.repositories.interfaces;
 
 import edu.aitu.oop3.models.Doctor;
 import java.sql.SQLException;

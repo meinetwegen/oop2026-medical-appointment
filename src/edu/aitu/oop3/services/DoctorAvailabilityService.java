@@ -2,7 +2,7 @@ package edu.aitu.oop3.services;
 
 import edu.aitu.oop3.exceptions.DoctorUnavailableException;
 import edu.aitu.oop3.exceptions.TimeSlotAlreadyBookedException;
-import edu.aitu.oop3.repositories.IAppointmentRepository;
+import edu.aitu.oop3.repositories.interfaces.IAppointmentRepository;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 

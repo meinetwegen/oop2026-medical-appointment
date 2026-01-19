@@ -2,7 +2,10 @@ package edu.aitu.oop3.services;
 
 import edu.aitu.oop3.exceptions.*;
 import edu.aitu.oop3.models.Appointment;
-import edu.aitu.oop3.repositories.*;
+import edu.aitu.oop3.repositories.interfaces.IAppointmentRepository;
+import edu.aitu.oop3.repositories.interfaces.IDoctorRepository;
+import edu.aitu.oop3.repositories.interfaces.IPatientRepository;
+
 import java.sql.SQLException;
 import java.util.List;
 
