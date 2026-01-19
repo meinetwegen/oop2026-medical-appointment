@@ -4,11 +4,11 @@ public abstract class User {
     private int id;
     private String fullName;
 
-    public User(String fullName) {      // конструктор для создания нового пользователя (id еще не назначен бд)
+    public User(String fullName) {
         setFullName(fullName);
     }
 
-    public User(int id, String fullName) {     // конструктор для объектов, загруженных из бд (с существующим id)
+    public User(int id, String fullName) {
         this.id = id;
         setFullName(fullName);
     }
@@ -17,7 +17,7 @@ public abstract class User {
         return id;
     }
 
-    public void setId(int id) { // добавляем сеттер, чтобы jdbc имел возможность установить ID
+    public void setId(int id) {
         this.id = id;
     }
 
