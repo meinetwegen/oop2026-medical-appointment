@@ -1,6 +1,6 @@
 package edu.aitu.oop3.models;
 
-public abstract class User {
+public abstract class User implements IUser{
     private int id;
     private String fullName;
 
@@ -13,6 +13,7 @@ public abstract class User {
         setFullName(fullName);
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -21,6 +22,7 @@ public abstract class User {
         this.id = id;
     }
 
+    @Override
     public String getFullName() {
         return fullName;
     }

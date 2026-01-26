@@ -10,6 +10,8 @@ import java.sql.SQLException;
 public class PostgresDB implements IDB {
     private static final Properties properties = new Properties();
 
+    private static PostgresDB instance;
+
     static {
         try (FileInputStream fis = new FileInputStream("config.properties")) {
             properties.load(fis);
@@ -23,7 +25,16 @@ public class PostgresDB implements IDB {
     private static final String USER = properties.getProperty("db.user");
     private static final String PASSWORD = properties.getProperty("db.password");
 
-    public PostgresDB() { }
+
+    private PostgresDB() { }
+
+
+    public static synchronized PostgresDB getInstance() {
+        if (instance == null) {
+            instance = new PostgresDB();
+        }
+        return instance;
+    }
 
     @Override
     public Connection getConnection() throws SQLException {

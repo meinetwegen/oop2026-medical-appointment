@@ -5,9 +5,6 @@ import edu.aitu.oop3.models.Doctor;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IDoctorRepository {
-    void add(Doctor doctor) throws SQLException;
-    Doctor findById(int id) throws SQLException;
-    List<Doctor> findAll() throws SQLException;
+public interface IDoctorRepository extends IRepository<Doctor>{
     List<Doctor> findBySpecialization(String spec) throws SQLException;
 }

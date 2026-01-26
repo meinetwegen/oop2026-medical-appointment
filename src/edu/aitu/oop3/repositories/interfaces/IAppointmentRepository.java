@@ -6,14 +6,9 @@ import edu.aitu.oop3.models.Appointment;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IAppointmentRepository {
-    void add(Appointment appointment) throws SQLException;
+public interface IAppointmentRepository extends IRepository<Appointment> {
     void cancel(int id) throws SQLException;
-    Appointment findById(int id) throws SQLException;
-
     List<Appointment> findByDoctorId(int doctorId) throws SQLException;     //для расписания врача
-
     List<Appointment> findByPatientId(int patientId) throws SQLException;   //для upcoming visits
-
     boolean isSlotTaken(int doctorId, java.time.LocalDateTime time) throws SQLException;    //проверка занятости времени
 }

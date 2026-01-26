@@ -46,15 +46,22 @@ public class PostgresAppointmentRepository implements IAppointmentRepository {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return new Appointment(rs.getInt("id"),
-                                        rs.getInt("patient_id"),
-                                        rs.getInt("doctor_id"),
-                                        rs.getTimestamp("time_slot").toLocalDateTime(),
-                                        rs.getString("status"));
+                    return new Appointment.Builder()
+                            .setId(rs.getInt("id"))
+                            .setPatientId(rs.getInt("patient_id"))
+                            .setDoctorId(rs.getInt("doctor_id"))
+                            .setAppointmentTime(rs.getTimestamp("time_slot").toLocalDateTime())
+                            .setStatus(rs.getString("status"))
+                            .build();
                 }
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Appointment> findAll() throws SQLException {
+        return List.of();
     }
 
     @Override
@@ -74,11 +81,14 @@ public class PostgresAppointmentRepository implements IAppointmentRepository {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
-                    apps.add(new Appointment(rs.getInt("id"),
-                                            rs.getInt("patient_id"),
-                                            rs.getInt("doctor_id"),
-                                            rs.getTimestamp("time_slot").toLocalDateTime(),
-                                            rs.getString("status")));
+                    Appointment app = new Appointment.Builder()
+                            .setId(rs.getInt("id"))
+                            .setPatientId(rs.getInt("patient_id"))
+                            .setDoctorId(rs.getInt("doctor_id"))
+                            .setAppointmentTime(rs.getTimestamp("time_slot").toLocalDateTime())
+                            .setStatus(rs.getString("status"))
+                            .build();
+                    apps.add(app);
                 }
             }
         }

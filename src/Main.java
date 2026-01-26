@@ -14,7 +14,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        IDB db = new PostgresDB();
+        IDB db = PostgresDB.getInstance();
         System.out.println("Connecting to Supabase...");
         try (Connection connection = db.getConnection()) {
             System.out.println("Connected successfully!");
@@ -73,17 +73,24 @@ public class Main {
                             doctorRepo.add(d);
                             System.out.println("Success! Doctor registered. Assigned ID: " + d.getId());
                             break;
-
                         case 3:
                             System.out.print("Patient ID: "); int pId = scanner.nextInt();
                             System.out.print("Doctor ID: "); int dId = scanner.nextInt();
                             scanner.nextLine();
                             System.out.print("Time (yyyy-MM-dd HH:mm): ");
                             LocalDateTime time = LocalDateTime.parse(scanner.nextLine(), formatter);
-                            appointmentService.bookAppointment(new Appointment(pId, dId, time, "scheduled"));
+
+                            Appointment newApp = new Appointment.Builder()
+                                    .setPatientId(pId)
+                                    .setDoctorId(dId)
+                                    .setAppointmentTime(time)
+                                    .setStatus("scheduled")
+                                    .build();
+
+                            appointmentService.bookAppointment(newApp);
+
                             System.out.println("Appointment booked!");
                             break;
-
                         case 4:
                             System.out.print("Appointment ID: ");
                             appointmentService.cancelAppointment(scanner.nextInt());
