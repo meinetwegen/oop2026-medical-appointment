@@ -6,6 +6,7 @@ import edu.aitu.oop3.repositories.interfaces.IAppointmentRepository;
 import edu.aitu.oop3.repositories.interfaces.IDoctorRepository;
 import edu.aitu.oop3.repositories.interfaces.IPatientRepository;
 
+import java.util.stream.Stream;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -53,5 +54,16 @@ public class AppointmentService {
 
     public List<Appointment> getPatientVisits(int patientId) throws SQLException {
         return appointmentRepo.findByPatientId(patientId);
+    }
+
+    public long getActiveAppointmentsCount() {
+        try {
+            List<Appointment> allApps = appointmentRepo.findAll();
+            return allApps.stream()
+                    .filter(a -> "scheduled".equalsIgnoreCase(a.getStatus()))
+                    .count();
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

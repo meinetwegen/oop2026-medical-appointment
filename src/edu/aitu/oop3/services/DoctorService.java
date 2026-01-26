@@ -4,13 +4,23 @@ import edu.aitu.oop3.models.Doctor;
 import edu.aitu.oop3.repositories.interfaces.IDoctorRepository;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class DoctorService {
+ public class DoctorService {
     private final IDoctorRepository doctorRepo;
 
     public DoctorService(IDoctorRepository doctorRepo) {
         this.doctorRepo = doctorRepo;
     }
+
+     public List<Doctor> getDoctorsSortedBySpecialization(String spec) throws SQLException{
+         List<Doctor> allDoctors = doctorRepo.findAll();
+
+         return allDoctors.stream()
+                 .filter(d -> d.getSpecialization().equalsIgnoreCase(spec))
+                 .sorted((d1, d2) -> d1.getFullName().compareTo(d2.getFullName()))
+                 .collect(Collectors.toList());
+     }
 
     public void findDoctorsBySpecialization(String spec) {
         try {

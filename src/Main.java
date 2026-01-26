@@ -6,6 +6,7 @@ import edu.aitu.oop3.repositories.interfaces.IAppointmentRepository;
 import edu.aitu.oop3.repositories.interfaces.IDoctorRepository;
 import edu.aitu.oop3.repositories.interfaces.IPatientRepository;
 import edu.aitu.oop3.services.*;
+import edu.aitu.oop3.factories.UserFactory;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -48,6 +49,7 @@ public class Main {
                 System.out.println("7. Show All Patients");
                 System.out.println("8. Show All Doctors");
                 System.out.println("9. Search Doctor by Specialization");
+                System.out.println("10. View Clinic Statistics (New Feature)");
                 System.out.println("0. Exit");
                 System.out.print("Select an option: ");
 
@@ -61,17 +63,23 @@ public class Main {
                             System.out.print("Full Name: "); String pName = scanner.nextLine();
                             System.out.print("Email: "); String pEmail = scanner.nextLine();
                             System.out.print("Phone: "); String pPhone = scanner.nextLine();
-                            Patient p = new Patient(pName, pEmail, pPhone);
-                            patientRepo.add(p);
-                            System.out.println("Success! Patient registered. Assigned ID: " + p.getId());
+                            IUser newUser = UserFactory.createUser("PATIENT", 0, pName, pPhone);
+                            if (newUser instanceof Patient) {
+                                Patient patientToSave = (Patient) newUser;
+                                patientToSave.setEmail(pEmail);
+                                patientRepo.add(patientToSave);
+                                System.out.println("Success! Patient registered. ID: " + patientToSave.getId());
+                            }
                             break;
 
                         case 2:
                             System.out.print("Doctor Name: "); String dName = scanner.nextLine();
                             System.out.print("Specialization: "); String dSpec = scanner.nextLine();
-                            Doctor d = new Doctor(dName, dSpec);
-                            doctorRepo.add(d);
-                            System.out.println("Success! Doctor registered. Assigned ID: " + d.getId());
+                            IUser newDoc = UserFactory.createUser("DOCTOR", 0, dName, dSpec);
+                            if (newDoc instanceof Doctor) {
+                                doctorRepo.add((Doctor) newDoc);
+                                System.out.println("Success! Doctor registered. ID: " + newDoc.getId());
+                            }
                             break;
                         case 3:
                             System.out.print("Patient ID: "); int pId = scanner.nextInt();
@@ -144,12 +152,22 @@ public class Main {
                         case 9:
                             System.out.print("Enter specialization (e.g. Dentist): ");
                             String spec = scanner.nextLine().trim();
-                            if (spec.isEmpty()) {
-                                System.out.println("Error: Specialization cannot be empty.");
-                            } else {
-                                doctorService.findDoctorsBySpecialization(spec);
-                            }
+                            List<Doctor> filteredDoctors = doctorService.getDoctorsSortedBySpecialization(spec);
 
+                            if (filteredDoctors.isEmpty()) {
+                                System.out.println("No doctors found with this specialization.");
+                            } else {
+                                System.out.println("Found & Sorted Doctors");
+                                filteredDoctors.forEach(doc -> System.out.println(doc.getFullName() + " | " + doc.getSpecialization()));
+                            }
+                            break;
+                        case 10:
+                            System.out.println("\nClinic Statistics");
+                            long activeCount = appointmentService.getActiveAppointmentsCount();
+
+                            System.out.println("Current active appointments in system: " + activeCount);
+                            System.out.println("Total patients registered: " + patientRepo.findAll().size());
+                            break;
                     }
                 } catch (Exception e) {
                     System.out.println("--- DEBUG ERROR INFO ---");
