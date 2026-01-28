@@ -61,7 +61,25 @@ public class PostgresAppointmentRepository implements IAppointmentRepository {
 
     @Override
     public List<Appointment> findAll() throws SQLException {
-        return List.of();
+        List<Appointment> apps = new ArrayList<>();
+        String sql = "SELECT * FROM appointments";
+
+        try (Connection conn = db.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Appointment app = new Appointment.Builder()
+                        .setId(rs.getInt("id"))
+                        .setPatientId(rs.getInt("patient_id"))
+                        .setDoctorId(rs.getInt("doctor_id"))
+                        .setAppointmentTime(rs.getTimestamp("time_slot").toLocalDateTime())
+                        .setStatus(rs.getString("status"))
+                        .build();
+                apps.add(app);
+            }
+        }
+        return apps;
     }
 
     @Override
