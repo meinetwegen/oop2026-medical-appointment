@@ -1,8 +1,7 @@
-package edu.aitu.oop3.repositories;
+package edu.aitu.oop3.infrastructure.persistence;
 
-import edu.aitu.oop3.db.IDB;
-import edu.aitu.oop3.models.Patient;
-import edu.aitu.oop3.repositories.interfaces.IPatientRepository;
+import edu.aitu.oop3.components.patientrecords.IPatientRepository;
+import edu.aitu.oop3.components.patientrecords.Patient;
 
 import java.sql.*;
 import java.util.ArrayList;

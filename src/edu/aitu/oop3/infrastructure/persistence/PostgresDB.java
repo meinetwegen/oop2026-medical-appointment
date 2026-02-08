@@ -1,4 +1,4 @@
-package edu.aitu.oop3.db;
+package edu.aitu.oop3.infrastructure.persistence;
 
 import java.io.FileInputStream;
 import java.io.IOException;

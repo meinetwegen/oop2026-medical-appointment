@@ -1,4 +1,6 @@
-package edu.aitu.oop3.models;
+package edu.aitu.oop3.components.doctors;
+
+import edu.aitu.oop3.shared.User;
 
 public class Doctor extends User {
     private String specialization;

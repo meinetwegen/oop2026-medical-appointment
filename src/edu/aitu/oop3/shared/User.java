@@ -1,6 +1,6 @@
-package edu.aitu.oop3.models;
+package edu.aitu.oop3.shared;
 
-public abstract class User implements IUser{
+public abstract class User implements IUser {
     private int id;
     private String fullName;
 

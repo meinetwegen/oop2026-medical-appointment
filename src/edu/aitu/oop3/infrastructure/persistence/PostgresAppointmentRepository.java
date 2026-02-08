@@ -1,8 +1,7 @@
-package edu.aitu.oop3.repositories;
+package edu.aitu.oop3.infrastructure.persistence;
 
-import edu.aitu.oop3.db.IDB;
-import edu.aitu.oop3.models.Appointment;
-import edu.aitu.oop3.repositories.interfaces.IAppointmentRepository;
+import edu.aitu.oop3.components.scheduling.Appointment;
+import edu.aitu.oop3.components.scheduling.IAppointmentRepository;
 
 import java.sql.*;
 import java.util.ArrayList;

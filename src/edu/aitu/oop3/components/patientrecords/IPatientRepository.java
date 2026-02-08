@@ -1,10 +1,9 @@
 //проверка существования + поиск пациента
-package edu.aitu.oop3.repositories.interfaces;
+package edu.aitu.oop3.components.patientrecords;
 
-import edu.aitu.oop3.models.Patient;
+import edu.aitu.oop3.shared.IRepository;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public interface IPatientRepository extends IRepository<Patient> {
     Patient findByEmail(String email) throws SQLException;

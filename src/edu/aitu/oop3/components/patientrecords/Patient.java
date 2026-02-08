@@ -1,4 +1,6 @@
-package edu.aitu.oop3.models;
+package edu.aitu.oop3.components.patientrecords;
+
+import edu.aitu.oop3.shared.User;
 
 public class Patient extends User {
     private String email;

@@ -1,12 +1,9 @@
-package edu.aitu.oop3.services;
+package edu.aitu.oop3.components.scheduling;
 
 import edu.aitu.oop3.exceptions.*;
-import edu.aitu.oop3.models.Appointment;
-import edu.aitu.oop3.repositories.interfaces.IAppointmentRepository;
-import edu.aitu.oop3.repositories.interfaces.IDoctorRepository;
-import edu.aitu.oop3.repositories.interfaces.IPatientRepository;
+import edu.aitu.oop3.components.doctors.IDoctorRepository;
+import edu.aitu.oop3.components.patientrecords.IPatientRepository;
 
-import java.util.stream.Stream;
 import java.sql.SQLException;
 import java.util.List;
 

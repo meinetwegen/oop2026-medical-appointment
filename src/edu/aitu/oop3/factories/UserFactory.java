@@ -1,6 +1,8 @@
 package edu.aitu.oop3.factories;
 
-import edu.aitu.oop3.models.*;
+import edu.aitu.oop3.components.doctors.Doctor;
+import edu.aitu.oop3.components.patientrecords.Patient;
+import edu.aitu.oop3.shared.IUser;
 
 public class UserFactory {
 

@@ -1,19 +1,19 @@
-import edu.aitu.oop3.db.IDB;
-import edu.aitu.oop3.db.PostgresDB;
-import edu.aitu.oop3.models.*;
-import edu.aitu.oop3.repositories.*;
-import edu.aitu.oop3.repositories.interfaces.IAppointmentRepository;
-import edu.aitu.oop3.repositories.interfaces.IDoctorRepository;
-import edu.aitu.oop3.repositories.interfaces.IPatientRepository;
-import edu.aitu.oop3.services.*;
+import edu.aitu.oop3.components.doctors.Doctor;
+import edu.aitu.oop3.components.doctors.DoctorService;
+import edu.aitu.oop3.infrastructure.persistence.*;
+import edu.aitu.oop3.components.patientrecords.Patient;
+import edu.aitu.oop3.components.scheduling.*;
+import edu.aitu.oop3.components.doctors.IDoctorRepository;
+import edu.aitu.oop3.components.patientrecords.IPatientRepository;
 import edu.aitu.oop3.factories.UserFactory;
+import edu.aitu.oop3.shared.IUser;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class Main {
+public class  Main {
     public static void main(String[] args) {
         IDB db = PostgresDB.getInstance();
         System.out.println("Connecting to Supabase...");
@@ -98,6 +98,7 @@ public class Main {
                             appointmentService.bookAppointment(newApp);
 
                             System.out.println("Appointment booked!");
+                            System.out.println("[NotificationComponent] SMS sent to Patient ID: " + pId);
                             break;
                         case 4:
                             System.out.print("Appointment ID: ");

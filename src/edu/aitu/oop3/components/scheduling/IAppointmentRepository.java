@@ -1,8 +1,9 @@
 //Интерфейсы определяют, что приложение может делать с базой данных, не уточняя, как именно (через PostgreSQL, MySQL или файл).
 //создание записей, их отмена и получение списков для расписания
-package edu.aitu.oop3.repositories.interfaces;
+package edu.aitu.oop3.components.scheduling;
 
-import edu.aitu.oop3.models.Appointment;
+import edu.aitu.oop3.shared.IRepository;
+
 import java.sql.SQLException;
 import java.util.List;
 

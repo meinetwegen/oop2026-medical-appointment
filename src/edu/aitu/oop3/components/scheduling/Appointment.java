@@ -1,4 +1,4 @@
-package edu.aitu.oop3.models;
+package edu.aitu.oop3.components.scheduling;
 
 import java.time.LocalDateTime;
 
