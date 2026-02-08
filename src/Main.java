@@ -72,6 +72,7 @@ public class  Main {
                             }
                             break;
 
+
                         case 2:
                             System.out.print("Doctor Name: "); String dName = scanner.nextLine();
                             System.out.print("Specialization: "); String dSpec = scanner.nextLine();
@@ -81,6 +82,7 @@ public class  Main {
                                 System.out.println("Success! Doctor registered. ID: " + newDoc.getId());
                             }
                             break;
+
                         case 3:
                             System.out.print("Patient ID: "); int pId = scanner.nextInt();
                             System.out.print("Doctor ID: "); int dId = scanner.nextInt();
